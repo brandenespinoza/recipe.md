@@ -17,12 +17,23 @@ Self-hosted recipe capture: paste a recipe URL, the app uses the OpenAI Response
 - Contributing
 - License
 
+## Product Summary
+
+**RECIPES.MD** is a self-hosted web app that takes a recipe URL, asks the OpenAI API to extract the recipe, and saves the result as a Markdown file with YAML front matter in a local folder. A minimal web UI lets users log in, add recipes, and browse saved recipes.
+
+Core flow:
+1. User logs in (cookie-based JWT).
+2. User pastes a recipe URL.
+3. Backend calls OpenAI Responses API (with web search tool) to generate a Markdown recipe.
+4. The Markdown is saved to `/recipes/<slug>.md`.
+5. The UI lists saved recipes and renders the Markdown for reading.
+
 ## Features
 
 - URL → clean Markdown with YAML front matter
 - Local filesystem storage for recipes (`/recipes/*.md`)
 - SQLite auth database (`/recipes/auth.db` by default, configurable)
-- Minimal single-page UI for list + read
+- Minimal single-page UI for list + read (dark theme)
 - Multi-user auth with admin bootstrap
 - Rescrape endpoint to refresh a saved recipe
 - Docker-first setup
@@ -33,7 +44,27 @@ Self-hosted recipe capture: paste a recipe URL, the app uses the OpenAI Response
 - **Auth:** JWT stored in HttpOnly cookies
 - **Storage:** Markdown files on disk + SQLite user DB
 - **LLM:** OpenAI Responses API with `web_search` tool
-- **Frontend:** Minimal SPA served by the backend (static assets)
+- **Frontend:** Minimal SPA served by the backend (static assets, dark theme with system fonts)
+
+### UI/UX Details
+
+- **Visual Language:** Dark theme (black background, white text), system sans-serif, minimal borders, uppercase labels
+- **Views:**
+  - **Header:** Hamburger menu (HOME, ACCOUNT), logo/title, quick-add pill for pasting URLs
+  - **Home (Recipes List):** Lists saved recipes by slug, click to open detail view
+  - **Recipe Detail:** Renders Markdown with minimal formatting, parses front matter for metadata (meal/category/tags/time/yield/source URL)
+  - **Add Recipe:** URL input with SCRAPE button, status line for feedback
+  - **Account:** Login form, sign out, change password form
+
+### LLM Recipe Extraction
+
+The backend calls the OpenAI Responses API with:
+- `model`: Configurable via `OPENAI_MODEL` env var (e.g., `gpt-5.2`)
+- `tools`: `[{"type": "web_search"}]`
+- `temperature`: `0`
+- `timeout`: `60s`
+
+The system prompt instructs the model to visit the URL, extract the recipe, and return Markdown with YAML front matter including title, slug, url, meal/category/tags, and time fields.
 
 ## Quick start (Docker)
 
