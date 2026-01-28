@@ -70,7 +70,7 @@ The system prompt instructs the model to visit the URL, extract the recipe, and 
 
 ```bash
 git clone https://github.com/brandenespinoza/recipes.md
-cd your-repo
+cd recipes.md
 docker compose up
 ```
 
