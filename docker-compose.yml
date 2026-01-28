@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/brandenespinoza/recipes.md:latest
+    image: ghcr.io/brandenespinoza/recipe.md:latest
     env_file:
       - .env
     volumes:

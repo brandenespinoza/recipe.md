@@ -1,4 +1,4 @@
-# RECIPES.MD
+# RECIPE.MD
 
 Self-hosted recipe capture: paste a recipe URL, the app uses the OpenAI Responses API (with web search) to extract the recipe and save it as a Markdown file with YAML front matter. Everything is stored locally on disk.
 
@@ -19,7 +19,7 @@ Self-hosted recipe capture: paste a recipe URL, the app uses the OpenAI Response
 
 ## Product Summary
 
-**RECIPES.MD** is a self-hosted web app that takes a recipe URL, asks the OpenAI API to extract the recipe, and saves the result as a Markdown file with YAML front matter in a local folder. A minimal web UI lets users log in, add recipes, and browse saved recipes.
+**RECIPE.MD** is a self-hosted web app that takes a recipe URL, asks the OpenAI API to extract the recipe, and saves the result as a Markdown file with YAML front matter in a local folder. A minimal web UI lets users log in, add recipes, and browse saved recipes.
 
 Core flow:
 1. User logs in (cookie-based JWT).
@@ -69,8 +69,8 @@ The system prompt instructs the model to visit the URL, extract the recipe, and 
 ## Quick start (Docker)
 
 ```bash
-git clone https://github.com/brandenespinoza/recipes.md
-cd recipes.md
+git clone https://github.com/brandenespinoza/recipe.md
+cd recipe.md
 docker compose up
 ```
 
