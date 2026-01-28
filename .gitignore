@@ -12,9 +12,8 @@ frontend/dist/
 auth.db
 
 # Recipe files
-recipes/
+recipes/*
 
 # Environment files
 .env
 .env.local
-.env.*
